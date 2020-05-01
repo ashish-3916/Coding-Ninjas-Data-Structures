@@ -1,0 +1,115 @@
+#include <cmath>
+
+class PriorityQueue {
+    vector<int> pq;
+    
+    public :
+    
+    PriorityQueue() {
+        
+    }
+    
+    bool isEmpty() {
+        return pq.size() == 0;
+    }
+    
+    // Return the size of priorityQueue - no of elements present
+    int getSize() {
+        return pq.size();
+    }
+    
+    int getMin() {
+        if(isEmpty()) {
+            return 0;		// Priority Queue is empty
+        }
+        return pq[0];
+    }
+    
+    void insert(int element) {
+        pq.push_back(element);
+        
+        int ci = pq.size() - 1;
+        int pi = (ci - 1) / 2;
+            
+       
+           
+            while(pi>=0 && pq[ci] < pq[pi]  ) {
+                int temp = pq[ci];
+                pq[ci] = pq[pi];
+                pq[pi] = temp;
+                
+                
+                ci=pi;
+                pi=(ci-1)/2;
+            }
+
+            
+        
+        
+    }
+    
+    
+    int removeMin() {
+        // Complete this function
+        if(pq.size()==0)
+            return -1;
+        int m =pq[0]; //return m in end
+        
+        int lastindex=pq.size()-1;
+        
+        int temp = pq[0]; //swap to last for CBT
+            pq[0] = pq[lastindex];
+            pq[lastindex] = temp;
+        
+        pq.pop_back();
+     //   delete pq[lastindex];
+        
+    int i =0;  
+  while(i<pq.size())   // min heap property
+    {   if(2*i+1>=pq.size())
+         break;
+        
+       else
+       {
+           if(2*i+2>=pq.size())
+               if(pq[i]>pq[2*i+1])
+                   {     int temp = pq[i];
+          			 	 pq[i] =pq[2*i+1];
+          			     pq[2*i+1]= temp;
+                            i=2*i+1;
+                   }
+   				else break;
+           else
+           {
+       
+            	if( pq[i]> min(pq[2*i+1],pq[2*i+2]))
+       
+          	  {    //storing idex of smallest children
+          		   	if(pq[2*i+1]>pq[2*i+2])
+                    {int temp = pq[i];
+            		pq[i] =pq[2*i+2];
+           			pq[2*i+2]= temp;
+                        i=2*i+2;
+                    }
+                        
+            	    else 
+                    {
+            	 
+             	   int temp = pq[i];
+            		pq[i] =pq[2*i+1];
+           			 pq[2*i+1]= temp;
+           			i=2*i+1;
+                        
+                   
+                 	}
+                }
+               else break;
+         	}
+    
+        }
+      }
+        return m;
+    }
+    
+    
+};
