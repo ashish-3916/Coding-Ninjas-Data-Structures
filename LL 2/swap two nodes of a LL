@@ -1,0 +1,23 @@
+Given a linked list, i & j, swap the nodes that are present at i & j position in the LL.
+You need to swap the entire nodes, not just the data.
+
+node* swap_nodes(node *head,int i,int j)
+{
+    //write your code here
+    node *p=head,*q=head;
+    
+    for(int index=0;index<i;index++)
+    {
+        p=p->next;
+    }
+     for(int index=0;index<j;index++)
+    {
+        q=q->next;
+    }
+    
+    int x=p->data;
+    p->data=q->data;
+    q->data=x;
+    
+    return head;
+}
