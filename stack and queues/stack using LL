@@ -1,0 +1,50 @@
+template <typename T>
+class Stack {
+    Node<T> *head;
+    int size;		// number of elements prsent in stack
+    
+    public :
+    
+    Stack() {
+        size=0;
+        head=NULL;
+    }
+    
+    int getSize() {
+        return size;
+    }
+    
+    bool isEmpty() {
+        return size==0;
+    }
+    
+    void push(T element) {
+       Node <T> *p=new Node<T>(element);
+        p->next=head;
+        head=p;
+       size+=1;
+    }
+    
+    T pop() {
+        // Return 0 if stack is empty. Don't display any other message
+        if(!head)
+        {return 0;}
+        
+        T x=head->data;
+        Node <T>* p =head;
+        head=head->next;
+        delete p;
+        size--;
+        return x;
+    }
+    
+    T top() {
+        // Return 0 if stack is empty. Don't display any other message
+        if(!head) return 0;
+        
+        return head->data;
+    }
+    
+  
+    
+};
