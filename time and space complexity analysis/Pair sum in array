@@ -1,0 +1,43 @@
+Given a random integer array A and a number x. Find and print the pair of elements in the array which sum to x.
+Array A can contain duplicate elements.
+While printing a pair, print the smaller element first.
+That is, if a valid pair is (6, 5) print "5 6". There is no constraint that out of 5 pairs which have to be printed in 1st line.
+You can print pairs in any order, just be careful about the order of elements in a pair.
+
+
+ #include <bits/stdc++.h> 
+#include <cmath>
+void pairSum(int input[], int size, int x) {
+   
+
+    sort(input,input+size);
+    float y=x/2;
+    for(int i=size-1; input[i]>=ceil(y);i--)
+    {
+        for(int j=i-1;j>=0;j--)
+        {
+            if(input[i]+input[j]==x)
+                cout<<input[j]<<" "<<input[i]<<endl;
+        }
+    }
+}
+
+#include<iostream>
+using namespace std;
+
+
+int main() {
+
+	int size;
+	int x;
+
+	cin>>size;
+	int *input=new int[1+size];	
+	
+	for(int i=0;i<size;i++)
+		cin>>input[i];
+	cin>>x;
+	pairSum(input,size,x);
+		
+	return 0;
+}
