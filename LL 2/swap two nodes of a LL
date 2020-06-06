@@ -3,6 +3,51 @@ You need to swap the entire nodes, not just the data.
 
 node* swap_nodes(node *head,int i,int j)
 {
+    node* temp=head , *prev=NULL;
+    
+    node *c1=NULL,*p1=NULL; //current 1 ,previous 1
+    
+    node *c2=NULL,*p2=NULL;//current 2 ,previous 2
+    
+    int count=0;
+    while(temp!=NULL)
+    {
+        if(count==i)
+        {
+          c1=temp;
+          p1=prev;
+            
+        }
+        else if(count==j)
+        {
+          c2=temp;
+          p2=prev;
+        }
+        prev=temp;
+        temp=temp->next;
+        count++;
+    }
+    
+    if(p1!=NULL)
+        p1->next=c2;
+    else
+        head=c2;
+    
+    if(p2!=NULL)
+        p2->next=c1;
+    else
+        head=c1;
+    node * p=c2->next;
+    c2->next= c1->next;
+     c1->next= p;
+    
+    return head;
+    
+}
+
+
+node* swap_nodes(node *head,int i,int j)
+{
     //write your code here
     node *p=head,*q=head;
     
