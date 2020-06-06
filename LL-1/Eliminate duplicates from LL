@@ -1,0 +1,20 @@
+  node* eliminate_duplicate(node* head)
+{
+    //write your code here
+    node *p=head->next,*q=head;
+    while(p)
+    {
+       if(p->data==q->data)
+       {
+           q->next=p->next;
+           node *t=p;
+           p=p->next;
+          delete t;
+       }
+      else{
+        q=q->next;
+        p=p->next;
+        }
+    }
+    return head;
+}
