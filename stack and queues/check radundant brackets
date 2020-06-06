@@ -10,6 +10,9 @@ Sample Input 2:
 Sample Output 2:
 false
 
+// in current code test cases like  }{}{}{}{}{ fails
+// see soln for other aproach
+
 bool checkRedundantBrackets(char *input) {
     // Write your code here
     stack <char> s;
