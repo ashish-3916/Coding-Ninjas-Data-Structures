@@ -1,0 +1,99 @@
+Given a generic tree, 
+find and return the node with second largest value in given tree. 
+Return NULL if no node with required value is present.
+
+//approach 1 is to find max and replace it by -infinty ans then again find the max
+but this change the given tree
+
+// other approach can be to ask func to bring max and second max
+// total cases needed to be handled
+
+// 2 answers 
+class helper {
+  public :
+    TreeNode<int>*  m;
+    TreeNode<int>* sm;
+    
+    helper (TreeNode<int>* m, TreeNode<int>* sm) {
+        this->m = m;
+        this->sm = sm;
+    }
+};
+
+helper help (TreeNode<int>* root) {
+    if(root==NULL){
+        helper r(NULL,NULL);
+        return r;
+    }
+    helper ans(root, NULL);
+    for (int i = 0; i < root->children.size(); i++) {
+            helper child = help (root -> children[i]);  
+            if(child.m->data > ans.m->data){
+                if(child.sm==NULL){
+                    ans.sm=ans.m;
+                    ans.m=child.m;
+                }
+                else{
+                    if(child.sm->data > ans.m->data){
+                        ans.sm=child.sm;
+                        ans.m=child.m;
+                    }
+                    else{
+                       ans.sm=ans.m;
+                        ans.m=child.m; 
+                    }
+                }
+            }
+        else {
+            if(ans.m->data!=child.m->data && (ans.sm==NULL || child.m->data > ans.sm->data)){
+                ans.sm=child.m;
+            }
+        }
+        }
+    return ans;
+}
+
+TreeNode <int>* secondLargest(TreeNode<int> *root) {
+    
+    if (root == NULL) return NULL;
+    helper ans = help (root);
+    return ans.sm;
+}
+
+
+
+
+
+void helper(TreeNode<int> *root,TreeNode<int> **first,TreeNode<int> **second){
+    if(root==NULL)
+    {
+        return;
+    
+    }
+    if(!(*first)){
+        *first=root;
+    }
+    else if(root->data>(*first)->data){
+        *second=*first;
+        *first=root;
+    }
+    else if(!(*second)|| root->data>(*second)->data)
+        *second=root;
+    
+    for(int i=0;i<root->children.size();i++)
+        helper(root->children[i],first,second);
+     
+}
+TreeNode <int>* secondLargest(TreeNode<int> *root) {
+    TreeNode<int> *second=NULL;
+    TreeNode<int> *first=NULL;
+    helper(root,&first,&second);
+        
+        if(second==NULL)
+            return NULL;
+    if(first->data==second->data)
+        return NULL;
+    return second;
+    // Write your code here
+
+}
