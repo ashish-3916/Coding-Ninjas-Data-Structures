@@ -1,0 +1,15 @@
+node* rev_linkedlist_itr(node* head)
+{
+    //write your iterative code here
+    node *p=head,*q=NULL,*r=NULL;
+    while(p)
+    {
+        r=q;
+        q=p;
+        p=p->next;
+        q->next=r;
+    }
+    
+    return q;
+}
+
