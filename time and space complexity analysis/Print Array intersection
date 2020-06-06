@@ -1,0 +1,42 @@
+Given two random integer arrays, print their intersection. That is, print all the elements that are present in both the given arrays.
+Input arrays can contain duplicate elements.
+
+Input format :
+Line 1 : Integer N, Array 1 Size
+Line 2 : Array 1 elements (separated by space)
+Line 3 : Integer M, Array 2 Size
+Line 4 : Array 2 elements (separated by space)
+
+Sample Input 1 :
+6
+2 6 8 5 4 3
+4
+2 3 4 7 
+Sample Output 1 :
+2 
+4 
+3
+
+
+void intersection(int input1[], int input2[], int size1, int size2) {
+   
+    sort(input1 ,input1+size1);
+    sort(input2 ,input2+size2);
+  int i=0,j=0;
+    while(i<size1 && j<size2)
+    {
+            if(input1[i]<input2[j])
+                i++;
+            else if(input1[i]>input2[j])
+                j++;
+            else if(input1[i]==input2[j])
+            {
+                cout<<input1[i]<<endl;
+                i++;
+                j++;
+                
+            }
+     } 
+       
+   
+}
