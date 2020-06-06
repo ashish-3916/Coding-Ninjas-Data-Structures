@@ -1,0 +1,61 @@
+Implement kReverse( int k ) in a linked list i.e. you need to reverse first K elements then reverse next k elements and join the linked list and so on.
+Indexing starts from 0. If less than k elements left in the last, you need to reverse them as well. If k is greater than length of LL, reverse the complete LL.
+You don't need to print the elements, just return the head of updated LL.
+Input format :
+
+Line 1 : Linked list elements (separated by space and terminated by -1)
+
+Line 2 : k
+
+Sample Input 1 :
+1 2 3 4 5 6 7 8 9 10 -1
+4
+Sample Output 1 :
+4 3 2 1 8 7 6 5 10 9
+
+
+node *reverse_linked_list_rec(node *head)
+{
+    //write your recursive code here
+  if(head==NULL || head ->next ==NULL)
+      return head;
+    
+    node* smallans=reverse_linked_list_rec(head->next);
+    node*tail= head->next;
+    tail->next=head;
+    head ->next =NULL;
+    
+    return smallans;
+                                         
+}
+
+
+node* kReverse(node*head,int n)
+{
+    if(head==NULL)
+        return NULL;
+    
+    node * h1=head,*t1=head;
+    int count=1;
+    while(count<n && t1->next)
+    {
+        t1=t1->next;
+        count++;
+    }
+    node*h2=t1->next;
+    t1->next=NULL;
+    
+    h1=reverse_linked_list_rec(h1);
+    t1=h1;
+    while(count>1)
+    {
+        t1=t1->next;
+        count--;
+    }
+    
+    h2=kReverse(h2,n);
+    
+    t1->next=h2;
+    
+    return h1;
+}
