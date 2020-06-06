@@ -1,0 +1,11 @@
+Given an integer array, which is sorted (in increasing order) and
+has been rotated by some number k in clockwise direction. Find and return the k.
+
+int FindSortedArrayRotation(int arr[], int n) {
+    
+    int i=0;
+    for(;arr[i]<=arr[i+1];i++)
+    {continue;}
+      
+    return i+1;
+}
