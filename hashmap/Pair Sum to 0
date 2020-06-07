@@ -1,0 +1,30 @@
+Given a random integer array A of size N. Find and print the pair of elements in the array which sum to 0.
+Array A can contain duplicate elements.
+While printing a pair, print the smaller element first.
+That is, if a valid pair is (6, -6) print "-6 6". There is no constraint that out of 5 pairs which have to be printed in 1st line. 
+You can print pairs in any order, just be careful about the order of elements in a pair.
+
+#include <map>
+void PairSum(int *input, int n) {	 
+
+    map<int,int> m;
+
+    for(int i=0 ;i<n ;i++)
+        m[input[i]]++;
+
+    for(int i=0 ;i<n ;i++)
+    {
+        if(m[-input[i]]>0)
+        {   
+            int  x= m[-input[i]];
+            while(x>0)
+            {if(input[i] > -input[i])
+                cout << -input[i] << " "<< input[i] <<endl;
+             else
+                 cout << input[i] << " "<< -input[i] <<endl;
+             x--; }
+
+            m[input[i]]--;
+        }
+    }
+}
