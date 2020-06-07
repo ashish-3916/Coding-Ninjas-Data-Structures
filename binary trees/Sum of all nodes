@@ -1,0 +1,19 @@
+Given a binary tree, find and return the sum of all nodes.
+
+
+int sumOfAllNodes(BinaryTreeNode<int>* root) {
+    if(!root)
+        return 0;
+    
+    int sum =root->data;
+    
+   int lsum=sumOfAllNodes (root->left);
+    
+        sum+=lsum;
+    
+    int rsum=sumOfAllNodes (root->right);
+ 
+        sum+=rsum;
+    
+    return sum;
+}
