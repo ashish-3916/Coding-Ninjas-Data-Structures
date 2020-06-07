@@ -1,0 +1,27 @@
+Given two random integer arrays, print their intersection. 
+That is, print all the elements that are present in both the given arrays.
+Input arrays can contain duplicate elements.
+
+#include <map>
+
+void intersection(int input1[], int input2[], int size1, int size2) {
+    map<int,int> m1 ;
+  
+    
+    for(int i=0 ;i<size1 ;i++)
+         m1[input1[i]]++;
+    
+    for(int i=0 ;i<size2 ;i++)
+    {
+        if(m1[input2[i]]>0)
+        {
+            cout<<input2[i]<<endl;
+            m1[input2[i]]--;  //reduce its occurence by 1;
+        }
+            
+    }
+    
+}
+
+
+/// check gfg for other approach.
