@@ -1,0 +1,24 @@
+Given a binary tree, print all nodes that don’t have a sibling.
+
+
+void nodesWithoutSibling(BinaryTreeNode<int> *root) {
+    // Write your code here
+    if(root==NULL)
+        return;
+    
+    if(root->left && !root->right)
+    {  cout<<root->left->data<<endl;
+    
+       nodesWithoutSibling(root->left); 
+    }
+     else if(!root->left && root->right)
+    {  cout<<root->right->data<<endl;
+    
+       nodesWithoutSibling(root->right); 
+    }
+	else 
+    {
+        nodesWithoutSibling(root->left); 
+        nodesWithoutSibling(root->right); 
+    }
+}
