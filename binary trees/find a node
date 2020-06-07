@@ -1,0 +1,24 @@
+Given a Binary Tree and an integer x, check if node with data x is present in the input binary tree or not. Return true or false.
+
+
+bool isNodePresent(BinaryTreeNode<int>* root, int x) {
+    
+   
+  if(root->data==x)
+      ans =true;
+    
+    bool ans=false;
+   if(root->left) 
+   {  bool leftans= isNodePresent(root->left,x);
+      if(leftans)
+          ans=leftans;
+   }
+    
+    if(root->right)
+    {   bool rightans= isNodePresent(root->right,x); 
+      if(rightans)
+          ans=rightans;
+    }
+   return ans; 
+
+}
