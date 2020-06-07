@@ -1,0 +1,14 @@
+Post-order traversal is: LeftChild RightChild Root
+
+
+void postOrder(BinaryTreeNode<int> *root) {
+    if(!root)return;
+    
+     
+    postOrder(root->left);
+    
+    postOrder(root->right);
+    
+    cout<<root->data<<" ";
+    
+}
