@@ -1,0 +1,24 @@
+Given a binary tree, check if its balanced i.e. depth of left and right subtrees of every node differ by at max 1.
+Return true if given binary tree is balanced, false otherwise.
+
+
+#include <cmath>
+
+int height(BinaryTreeNode<int> *root)
+{   if(root==NULL)
+       return 0;
+ 
+    return 1+max(height(root->left),height(root->right));
+}
+bool isBalanced(BinaryTreeNode<int> *root) {
+    
+    if (root == NULL) 
+        return 1; 
+    int l=height(root->left);
+	int r=height(root->right);	
+   
+     if ( ( abs(l- r) ==0 || abs(l-r) == 1 ) && isBalanced(root->left) && isBalanced(root->right))
+        return 1;
+    
+   return 0;
+}
