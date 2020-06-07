@@ -1,0 +1,96 @@
+Given a binary tree, find and return the min and max data value of given binary tree.
+Return the output as an object of PairAns class, which is already created.
+
+
+#include <iostream>
+#include <queue>
+
+template <typename T>
+class BinaryTreeNode {
+    public : 
+    T data;
+    BinaryTreeNode<T> *left;
+    BinaryTreeNode<T> *right;
+
+    BinaryTreeNode(T data) {
+        this -> data = data;
+        left = NULL;
+        right = NULL;
+    }
+};
+
+class PairAns {
+    public :
+    int min;
+    int max;
+};
+
+using namespace std;
+#include "solution.h"
+
+BinaryTreeNode<int>* takeInput() {
+    int rootData;
+    //cout << "Enter root data : ";
+    cin >> rootData;
+    if(rootData == -1) {
+        return NULL;
+    }
+    BinaryTreeNode<int> *root = new BinaryTreeNode<int>(rootData);
+    queue<BinaryTreeNode<int>*> q;
+    q.push(root);
+    while(!q.empty()) {
+        BinaryTreeNode<int> *currentNode = q.front();
+	q.pop();
+        int leftChild, rightChild;
+        //cout << "Enter left child of " << currentNode -> data << " : ";
+        cin >> leftChild;
+        if(leftChild != -1) {
+            BinaryTreeNode<int>* leftNode = new BinaryTreeNode<int>(leftChild);
+            currentNode -> left =leftNode;
+            q.push(leftNode);
+        }
+        //cout << "Enter right child of " << currentNode -> data << " : ";
+        cin >> rightChild;
+        if(rightChild != -1) {
+            BinaryTreeNode<int>* rightNode = new BinaryTreeNode<int>(rightChild);
+            currentNode -> right =rightNode;
+            q.push(rightNode);
+        }
+    }
+    return root;
+}
+
+#include<cmath>
+PairAns minMax(BinaryTreeNode<int> *root) {
+   if(root->left==NULL && root->right==NULL)
+   { PairAns ans;
+     ans.max=ans.min=root->data;
+      return ans;
+   }
+    
+    PairAns ans;
+     ans.max=ans.min=root->data; 
+    
+  if(root->left)
+  {
+     PairAns ansleft= minMax(root->left);
+      ans.max=max(ans.max,ansleft.max);
+      
+      ans.min=min(ans.min,ansleft.min);
+  }
+ if(root->right)
+  {
+     PairAns ansright= minMax(root->right);
+      ans.max=max(ans.max,ansright.max);
+      
+      ans.min=min(ans.min,ansright.min);
+  }
+    
+    return ans;
+}
+
+int main() {
+    BinaryTreeNode<int>* root = takeInput();
+    PairAns ans = minMax(root);
+    cout << ans.max << " " << ans.min << endl;
+}
