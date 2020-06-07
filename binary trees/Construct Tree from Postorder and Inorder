@@ -1,0 +1,86 @@
+Given Postorder and Inorder traversal of a binary tree, create the binary tree associated with the traversals.
+You just need to construct the tree and return the root.
+
+Sample Input :
+8
+8 4 5 2 6 7 3 1
+4 8 2 5 1 6 3 7
+Sample Output :
+1 
+2 3 
+4 5 6 7 
+8
+
+
+
+// 													prestart,pre end,instart,inend
+
+BinaryTreeNode<int>* tree(int *postorder, int *inorder,int ps,int pe, int is, int ie)
+{
+    if(ps>pe)
+        return NULL;
+    
+    
+    BinaryTreeNode<int>* root=new BinaryTreeNode<int>(postorder[pe]);
+    
+     int k = 0; 
+    for(int i = is; i <= ie; i++)
+    { if(postorder[pe] == inorder[i])
+        { k = i; break; } 
+    }
+    
+    int lps=ps;    //left prestart
+    int lis=is;  //left instart
+    int  lie=k-1;   //left inend
+    int lpe= lie-lis+lps; //left  pre end
+    
+    int rps=lpe+1; //right prestart
+    int rpe=pe-1;//  right preend
+    int ris=k+1;  //right instart
+    int rie=ie;   //right inend
+    
+    root->left=tree(postorder,inorder,lps,lpe,lis,lie);
+    root->right=tree(postorder,inorder,rps,rpe,ris,rie);
+    
+    return root;
+    
+    
+}
+BinaryTreeNode<int>* getTreeFromPostorderAndInorder(int *postorder, int postLength, int *inorder, int inLength) {
+    return tree (postorder,inorder,0,postLength-1,0,inLength-1);
+
+}
+
+
+
+/*BinaryTreeNode<int>* tree(int *post,int ps,int pe,int *in,int &postorder )
+ {
+     if(ps>pe)
+         return NULL;
+     
+     
+     
+     BinaryTreeNode<int>* temp=new BinaryTreeNode<int>(post[postorder--]);
+     
+     int k;
+     for(k=ps;k<=pe;k++)
+     {
+         if(in[k]==post[postorder+1])
+             break;
+     }
+     
+     temp->right=tree(post,k+1,pe,in,postorder);
+
+     temp->left=tree(post,ps,k-1,in,postorder);
+     
+     return temp;
+ }
+
+
+BinaryTreeNode<int>* getTreeFromPostorderAndInorder(int *postorder, int postLength, int *inorder, int inLength) {
+
+    int post=postLength-1;
+    
+    return tree(postorder,0,postLength-1,inorder,post);
+
+}*/
