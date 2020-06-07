@@ -1,0 +1,106 @@
+You are given with an array of integers that contain numbers in random order.
+Write a program to find the longest possible sequence of consecutive numbers using the numbers from given array.
+
+#include <vector>
+#include <unordered_map>
+
+using namespace std;
+
+vector<int> longestConsecutiveIncreasingSequence(int *arr, int n){
+    vector<int> ans;
+    unordered_map<int,int> a;
+    for(int i=0;i<n;i++)
+    {
+        a[arr[i]]=1;
+    }
+    int max=0;
+    int k=0;
+    
+    for(int i=0;i<n;i++)
+    {
+        int x=arr[i];
+        int j=0;
+        if(a.count(x-1)>0)
+            continue;
+        while(a.count(x)>0 )
+        {
+                
+            j++;
+            x++;
+        }
+        if(j>max)
+        {  
+            max=j;
+            k=arr[i];
+            //cout<<" j:"<<j<<" k:"<<k<<endl; 
+        }   
+    }
+    
+    for(int i=0;i<max;i++)
+    {
+        ans.push_back(k);
+        k++;
+    }
+    return ans;
+}
+
+
+//my appraoch
+
+/*
+vector<int> longestConsecutiveIncreasingSequence(int *arr, int n){
+	
+    unordered_map <int ,bool> m;
+    unordered_map <int ,int> index;
+    for(int i=0;i<n ;i++)
+    { m[arr[i]] =true;
+     index[arr[i]]=i;}
+    
+    int start=-1;
+    int size = 0;
+   
+    for( int i=0;i<n ;i++)
+    { 
+       if( m[arr[i]]==false) // if already visted continue;
+         continue;
+        
+       int nsize=0, nstart=arr[i];
+       int j=arr[i];
+        
+        while(m.count(j)>0 && m[j]==true) //forward  (if present and not visited)
+        {
+            nsize+=1;
+            m[j]=false;
+            j++;
+        }
+    // cout<<nsize<<" "<< nstart << " ";
+          j=arr[i]-1;
+       
+        while(m.count(j)>0 && m[j]==true) //backward   (if present and not visited)
+        { 
+            nstart =j;
+            nsize+=1;
+            m[j]=false;
+            j--;
+        }
+       // cout<< nsize<<" " <<size<<" "<<start<<" " << nstart<<endl;
+        if(nsize>=size) //update
+        {
+            if(size==nsize) // the starting point comes first in input array.
+            {
+               if(index[start]>index[nstart])
+                   start=nstart;
+            }
+            else  start =nstart;
+            
+            size=nsize;
+            
+        }
+     // cout<< nsize<<" " <<size<<" "<<start<<" " << nstart<<endl;
+    }
+    vector<int > v;
+    for( int i=0 ;i< size ;i++) 
+      v.push_back(start), start++;
+    
+    return v;
+}*/
