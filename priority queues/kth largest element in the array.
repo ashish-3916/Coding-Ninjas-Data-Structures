@@ -1,0 +1,22 @@
+Given an array A of random integers and an integer k, find and return the kth largest element in the array.
+Try to do this question in less than O(nlogn) time
+
+#include <vector>
+#include <queue>
+using namespace std;
+int kthLargest(vector<int> arr, int n, int k)
+{
+    
+  priority_queue <int> pq; 
+    
+    // push first k eements in the priority queue
+    for(int i=0 ;i<n; i++)
+         pq.push(arr[i]);
+        
+    // for remaining elements compare the element with max of pq ie top
+    //if smaller push in heap
+    for(int j=0;j<k-1;j++){
+        pq.pop();
+    }
+    return pq.top();
+}
