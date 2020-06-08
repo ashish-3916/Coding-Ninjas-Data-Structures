@@ -1,0 +1,12 @@
+Given an array of integers, check whether it represents max-heap or not.
+Return true or false.
+
+bool checkMaxHeap(int arr[], int n){
+
+   for(int child=1; child<n ;child++)
+    {
+        int parent = (child-1)/2;
+        if(arr[parent]<arr[child])
+            return false;
+    }
+}
