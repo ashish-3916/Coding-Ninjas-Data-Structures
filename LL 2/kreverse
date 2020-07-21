@@ -13,7 +13,7 @@ Sample Input 1 :
 Sample Output 1 :
 4 3 2 1 8 7 6 5 10 9
 
-
+//reverses the LL
 node *reverse_linked_list_rec(node *head)
 {
     //write your recursive code here
@@ -37,6 +37,7 @@ node* kReverse(node*head,int n)
     
     node * h1=head,*t1=head;
     int count=1;
+    //move to kth node
     while(count<n && t1->next)
     {
         t1=t1->next;
@@ -44,17 +45,22 @@ node* kReverse(node*head,int n)
     }
     node*h2=t1->next;
     t1->next=NULL;
-    
+    //break this part from LL 
+    // and reverse it
     h1=reverse_linked_list_rec(h1);
     t1=h1;
+    
+    // iterate till next k nodes
     while(count>1)
     {
         t1=t1->next;
         count--;
     }
     
+    // now call recuursion to kreverse remainng LL
     h2=kReverse(h2,n);
     
+    //connect the LL
     t1->next=h2;
     
     return h1;
