@@ -1,0 +1,64 @@
+An island is a small piece of land surrounded by water .
+A group of islands is said to be connected if we can reach from any given island to any other island in the same group .
+Given N islands (numbered from 1 to N) and two lists of size M (u and v) denoting island u[i] is connected to island v[i] and vice versa . 
+Can you count the number of connected groups of islands.
+
+
+void printDFS(int** graph ,int v,int s,bool* visited )
+{ 
+    
+    visited[s]= true;
+    
+    for(int i =1 ;i< v ;i++)
+    {
+        if(!visited[i]&& graph[s][i]==1)
+    	printDFS( graph ,v, i ,visited);
+    }
+    
+}
+int solve(int n,int m,vector<int>u,vector<int>v)
+{
+	
+     int** graph = new int * [n+1];
+
+    for(int i=0 ;i <n+1 ;i++)
+    {
+        graph[i]=new int[n+1];
+        for( int j=0 ;j<n+1 ;j++)
+            graph[i][j]=0; 
+    }
+
+    for(int i=0 ;i< m ;i++)
+    {
+        
+        graph[u[i]][v[i]]=1;
+        graph[v[i]][u[i]]=1;
+    }
+    bool * visited=new bool[n+1];
+    for(int i=0 ;i<n+1;i++)
+        visited[i]= false;
+int total=0;
+    for(int i=1;i<n+1;i++)
+    {
+   		 if(!visited[i])
+         { total++;
+             printDFS(graph,n+1, i,visited );
+         }
+        
+	}
+    
+
+
+
+
+    delete []  visited;
+    for(int i = 0 ;i <n+1 ;i++)
+        delete [] graph[i];
+
+    delete[] graph;
+    
+    return total;
+}
+
+
+    
