@@ -13,6 +13,65 @@ Sample Input 1 :
 Sample Output 1 :
 4 3 2 1 8 7 6 5 10 9
 
+
+//using class
+
+class Pair{
+    public:
+    node* head;
+    node* tail;
+    Pair(){
+        head=NULL;
+        tail=NULL;
+    }
+    
+};
+Pair reverseurec(node* head){
+    
+    	if(head==NULL||head->next==NULL){
+            Pair ans;
+            ans.head=head;
+            ans.tail=head;
+                return ans;
+        }
+    Pair sa=reverseurec(head->next);
+  	sa.tail->next=head;
+    sa.tail=head;
+    head->next=NULL;
+    
+    return sa;
+    	
+}
+node* kReverse(node*head,int n)
+{
+    if(head==NULL)
+        return NULL;
+    
+    node * h1=head,*t1=head;
+    int count=1;
+    while(count<n && t1->next)
+    {
+        t1=t1->next;
+        count++;
+    }
+    node*h2=t1->next;
+    t1->next=NULL;
+    
+    //h1=reverse_linked_list_rec(h1);
+    Pair smallans=reverseurec(h1);
+    
+    
+    h2=kReverse(h2,n);
+    
+    smallans.tail->next=h2;
+    
+    return smallans.head;
+    //write your code here
+}
+
+
+
+
 //reverses the LL
 node *reverse_linked_list_rec(node *head)
 {
