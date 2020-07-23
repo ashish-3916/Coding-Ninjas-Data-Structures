@@ -1,0 +1,38 @@
+Delete every N nodes
+Given a linked list and two integers M and N. Traverse the linked list such that you retain M nodes then delete next N nodes, 
+continue the same until end of the linked list. 
+That is, in the given linked list you need to delete N nodes after every M nodes.
+
+
+
+
+node* skipMdeleteN(node  *head, int M, int N) {
+if(head==NULL ||head->next==NULL)
+{
+    return head;
+}
+ node*temp;
+int count1=0;
+int count2=0;
+while(temp-!=NULL && count1<M-1)
+{
+temp=temp->next;
+    count1++;
+}node*t1;
+    t1=temp;
+    while(temp!=NULL && count2<N-1)
+    {
+        temp=temp->next;
+        count2++;
+    }
+ node*t2;
+    t2=temp->next;
+ t1->next=t2;   
+    
+ node*m;   
+m= skipMdeleteN(head->next,M,N);   
+t2->next=m;
+return head;
+    
+
+}
