@@ -10,6 +10,56 @@ Print the path in reverse order. That is, print v2 first, then intermediate vert
 #include<unordered_map>
 #include <queue> 
 using namespace std;
+
+
+void getPath(int **edges, int n, bool *visited, int v1, int v2)
+{
+    if(v1 == v2)
+    {
+        cout << v1 << " ";
+        return;
+    }
+    
+    unordered_map <int,int> map;
+    
+    queue <int> q;
+    q.push(v1);
+    visited[v1] = true;
+    
+    while(!q.empty())
+    {
+        int currentIndex = q.front();
+        q.pop();
+        
+        for(int i=0; i<n; i++)
+        {
+            if(edges[currentIndex][i] == 1 && !visited[i])
+            {
+                if(i == v2)
+                {
+                    cout << v2 << " ";
+                    map[v2] = currentIndex;
+                    
+                    int j = v2;
+                    while(j != v1)
+                    {
+                        cout << map[j] << " ";
+                        j = map[j];
+                    }
+                    return;
+                }
+                
+                else
+                {
+                    q.push(i);
+                    visited[i] = true;
+                    map[i] = currentIndex;
+                }
+            }
+        }
+    }
+}
+
  
 
 vector<int> * getpath( int ** graph , int v , int s ,int e , bool * visited)
