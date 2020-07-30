@@ -26,7 +26,7 @@ bool solve(char input[]) {
 
 bool checkAB(char input[]) {
     if(input[0]=='\0')
-        return true; // Write your code here
+        return true; 
     else if (input[0] != 'a')
         return false;
     return solve(input);
