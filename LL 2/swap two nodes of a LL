@@ -1,6 +1,67 @@
 Given a linked list, i & j, swap the nodes that are present at i & j position in the LL.
 You need to swap the entire nodes, not just the data.
 
+//head is head of your linked list, i and j are indexes to be swapped
+// Following is the node structure
+/**************
+class node{
+public:
+    int data;
+    node * next;
+    node(int data){
+        this->data=data;
+        this->next=NULL;
+    }
+};
+***************/
+node* swap_nodes(node *head,int i,int j)
+{
+    if(i==j){
+        return NULL;
+    }
+    if(i>j){
+        int a=i;
+        i=j;
+        j=a;
+    }
+    node* p1=NULL;
+    node* p2=NULL;
+    node* temp1=head;
+    node* temp2=head;
+    if(i==0){
+        for(int a=1;a<=j;a++){
+            p2=temp2;
+            temp2=temp2->next;
+        }
+        if(j==1){
+            node *a=temp2->next;
+            temp2->next=temp1;
+            temp1->next=a;
+            return temp2;
+        }
+        node *a=temp1->next;
+        temp1->next=temp2->next;
+        p2->next=temp1;
+        temp2->next=a;
+        return temp2;
+    }   
+    for(int a=1;a<=i;a++){
+        p1=temp1;
+        temp1=temp1->next;
+    }
+    for(int a=1;a<=j;a++){
+        p2=temp2;
+        temp2=temp2->next;
+    }
+    p1->next=temp2;
+    p2->next=temp1;
+    node *a=temp1->next;
+    temp1->next=temp2->next;
+    temp2->next=a;
+    return head;
+}
+
+
 node* swap_nodes(node *head,int i,int j)
 {
     node* temp=head , *prev=NULL;
