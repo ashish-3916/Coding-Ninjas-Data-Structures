@@ -9,6 +9,69 @@ Cost of a path is defined as the sum of values of each cell through which path p
 #include <cmath>
 using namespace std;
 
+
+int minCost(int **input, int n, int m,int row=0,int column=0,int **arr) {
+   
+    if(arr[row][column]!=-1)
+    {
+        return arr[row][column];
+    }
+    if(m-1==column&&n-1==row)
+    {
+        return input[row][column];
+    }
+    if(n-1==row)
+    {
+        int a=0;
+        for(int i=column;i<m;i++)
+        {
+            a+=input[row][i];
+        }
+        return a;
+    }
+    if(m-1==column)
+    {
+        int a=0;
+        for(int i=row;i<n;i++)
+        {
+            a+=input[i][column];
+        }
+        return a;
+    }
+    int a=input[row][column];
+    int b=minCost(input,n,m,row,column+1,arr);
+    int c=minCost(input,n,m,row+1,column+1,arr);
+    int d=minCost(input,n,m,row+1,column,arr);
+    b=min(b,c);
+    b=min(b,d);
+    arr[row][column]=a+b;
+    return a+b;
+    
+    
+}
+
+int minCostPath(int **input, int n, int m)
+{
+    int **arr=new int*[n];
+    for(int i=0;i<n;i++)
+    {
+        arr[i]=new int[m];
+        for(int j=0;j<m;j++)
+        {
+            arr[i][j]=-1;
+        }
+    }
+    return minCost(input,n,m,0,0,arr);
+}
+
+
+
+
+
+
+
+
+
 int mincostpath(int **input, int m, int n,int sr,int sc)
 {
     if(sr==m-1 && sc==n-1)
