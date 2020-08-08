@@ -7,32 +7,42 @@ That is, in the given linked list you need to delete N nodes after every M nodes
 
 
 node* skipMdeleteN(node  *head, int M, int N) {
-if(head==NULL ||head->next==NULL)
-{
-    return head;
-}
- node*temp;
-int count1=0;
-int count2=0;
-while(temp-!=NULL && count1<M-1)
-{
-temp=temp->next;
-    count1++;
-}node*t1;
-    t1=temp;
-    while(temp!=NULL && count2<N-1)
+    
+    if(M==0) return NULL; // edge case  not a base case
+    
+    //base case
+    if(head==NULL ||head->next==NULL) 
     {
-        temp=temp->next;
-        count2++;
+        return head;
     }
- node*t2;
+    
+    node*temp=head;
+    int count1=0;
+    int count2=0;
+    while(temp->next !=NULL && count1<M-1) //travel M nodes
+    {   count1++;
+        temp=temp->next;
+        
+    }
+    node*t1=temp;
+   // t1=temp;
+  temp=temp->next;
+    if(temp==NULL)
+        return head;
+    
+    while(temp->next!=NULL && count2<N-1)
+    {   count2++;
+        temp=temp->next;
+      
+    }
+    
+    node*t2;
     t2=temp->next;
- t1->next=t2;   
-    
- node*m;   
-m= skipMdeleteN(head->next,M,N);   
-t2->next=m;
-return head;
-    
+      
+
+    node*m=skipMdeleteN(t2,M,N);   
+    t1->next=m;
+    return head;
+
 
 }
