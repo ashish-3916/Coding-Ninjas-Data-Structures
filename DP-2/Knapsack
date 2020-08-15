@@ -18,6 +18,52 @@ int knapsack(int* weights, int* values, int n, int maxWeight){
         return max(values[0]+knapsack(weights+1,values+1,n-1,maxWeight-weights[0]),knapsack(weights+1,values+1,n-1,maxWeight));
     
 }
+---------------------------------------------------------------------------------------------------------------------------------------------------
+// memorization
+
+#include <iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+int knapsack(int* weights, int* values, int n, int maxWeight, int  dp[101][21]){
+
+    
+    
+    if(n==0 || maxWeight==0)
+        return 0;
+    if(dp[maxWeight][n]!=-1)
+        return dp[maxWeight][n];
+  if(weights[0]>maxWeight)
+        return dp[maxWeight][n]=dp[maxWeight][n]= knapsack(weights+1,values+1, n-1,maxWeight,dp);
+    
+     else
+        return dp[maxWeight][n]=dp[maxWeight][n]=max(values[0]+knapsack(weights+1,values+1,n-1,maxWeight-weights[0],dp),
+                   knapsack(weights+1,values+1,n-1,maxWeight,dp));
+}
+int main() {
+	int n; 
+	cin >> n;
+	int dp[101][21];
+         memset ( dp, -1 , sizeof(dp));
+	int* weights = new int[n];
+	int* values = new int[n];
+
+	for(int i = 0; i < n; i++){
+		cin >> weights[i];
+	}
+
+	for(int i = 0; i < n; i++){
+		cin >> values[i];
+	}
+
+	int maxWeight;
+	cin >> maxWeight;
+
+	cout << knapsack(weights, values, n, maxWeight,dp) << endl;
+}   
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+// dp solution
 
 int knapsack(int* w, int* v, int n, int max_weight)
 {
