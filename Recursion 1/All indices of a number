@@ -1,3 +1,38 @@
+
+int allIndexes(int input[], int size, int x, int output[]) {
+ 
+   if(size==0) 
+       return 0;
+    int ans =allIndexes(input+1,size-1,x,output);
+
+   // output[k]=output[k]+1;k++;
+    if(input[0]==x){
+        if(ans!=0)  // if output contains previous indexes
+        {
+  			for(int i=ans-1 ;i>=0;i--)  // increment their index and shift them 1 right side as we have to add
+                //at output[0] the current index
+            {
+					output[i]++;
+                output[i+1]=output[i];
+                
+            }
+        }
+        
+        output[0]=0; 
+        return ans+1;
+    } 
+    else
+    {    //just incrmemnt index
+        for(int i=ans-1 ;i>=0;i--)
+            {
+					output[i]++;
+                //output[i+1]=output[i];
+            }
+     return ans;   
+    }
+      
+}
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
 #include<iostream>
 
 using namespace std;
