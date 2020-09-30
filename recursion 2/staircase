@@ -1,33 +1,39 @@
-Suppose you have a string made up of only 'a' and 'b'. Write a recursive function that checks if the string was generated using the following rules:
-a. The string begins with an 'a'
-b. Each 'a' is followed by nothing or an 'a' or "bb"
-c. Each "bb" is followed by nothing or an 'a'
-If all the rules are followed by the given string, return true otherwise return false.
-Sample Input:
-abb
-Sample Output:
-true
+/*Staircase
+Send Feedback
+A child is running up a staircase with N steps, and can hop either 1 step, 2 steps or 3 steps at a time. Implement a method to count how many possible ways the child can run up to the stairs. You need to return number of possible ways W.
+Input format :
+Integer N
+Output Format :
+Integer W
+Constraints :
+1 <= N <= 30
+Sample Input 1 :
+4
+Sample Output 1 :
+7
+Sample Input 2 :
+5
+Sample Output 2 :
+13
+*/
 
-bool solve(char input[]) {
-    if(input[0]=='\0')
-        return true; // Write your code here
-    bool so;
-    if(input[0]=='a'&&(input[1]=='\0'||input[1]=='a'))
-        so=solve(input+1);
-    else if(input[0]=='a'&&(input[1]=='b'&&input[2]=='b'))
-        so=solve(input+1);
-    else if(input[0]=='b'&&input[1]=='b'&&(input[2]=='\0'||input[2]=='a'))
-        so= solve(input+2);
-    else
-        return false;
-    return so;
+#include <iostream>
+using namespace std;
+int staircase(int n){
+    if(n == 1 || n == 0){
+        return 1;
+    }
+    else if(n == 2){
+        return 2;
+    }
+    else{
+        return staircase(n-1) + staircase(n-2) + staircase(n-3);
+    }
+}
+int main() {
+    int n, output;
+    cin >> n;
+    output = staircase(n);
+    cout << output <<endl;
 }
 
-
-bool checkAB(char input[]) {
-    if(input[0]=='\0')
-        return true; // Write your code here
-    else if (input[0] != 'a')
-        return false;
-    return solve(input);
-}
