@@ -44,10 +44,10 @@ void primsMST(int ** graph , int v ,int e){
          
          for(int j=0 ;j<v ;j++)
          {
-				if(graph[MinVertex][j] && !visited[j] && graph[MinVertex][j]  < weight[j])
+	   if(graph[MinVertex][j]&&!visited[j]&&graph[MinVertex][j]<weight[j])
                 {
                     weight[j]=graph[MinVertex][j] ;
-                        parent[j]=MinVertex;
+                    parent[j]=MinVertex;
                 }
          }
      }
