@@ -38,4 +38,15 @@ SinglyLinkedListNode* removeDuplicates(SinglyLinkedListNode* head) {
   return head;
   }
 }
+--------------------------------------------------------------
 
+if ((head == null) || (head.next == null))
+        return head;
+  
+    Node tmp = RemoveDuplicates(head.next);
+       
+    if (head.next != null)
+        if (head.data == head.next.data)
+            head.next = head.next.next;
+    
+    return head;
