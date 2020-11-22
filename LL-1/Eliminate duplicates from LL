@@ -1,4 +1,4 @@
-  node* eliminate_duplicate(node* head)
+node* eliminate_duplicate(node* head)
 {
     //write your code here
     node *p=head->next,*q=head;
@@ -18,3 +18,24 @@
     }
     return head;
 }
+---------------------------------------------------------------------------
+
+// recursively
+
+SinglyLinkedListNode* removeDuplicates(SinglyLinkedListNode* head) {
+ if(head==NULL || head->next == NULL)
+ return head;
+  if(head->data == head->next->data)
+  {
+      SinglyLinkedListNode* temp=head;
+      head=head->next;
+      temp->next=NULL;
+      delete temp; 
+      return removeDuplicates(head);
+  }
+  else{
+  head->next =removeDuplicates(head->next);
+  return head;
+  }
+}
+
