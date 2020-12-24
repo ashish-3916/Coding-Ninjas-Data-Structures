@@ -11,6 +11,47 @@ Print the path in reverse order. That is, print v2 first, then intermediate vert
 #include <queue> 
 using namespace std;
 
+void BFS(vector<vector<int> > &graph , vector<bool> & visited ,int v, int sv , int ev , vector<int>& path)
+{ 
+    if( sv == ev)
+    { path.push_back(sv); return ;}
+
+
+    queue<int> pn;
+    unordered_map<int, int> m;
+    pn.push(sv);
+    visited[sv]=1;
+
+
+    while(!pn.empty())
+    {
+        int s= pn.front ();
+        pn.pop();
+
+        if(graph[s][ev])
+        {
+            path.push_back(ev);
+            while(s!=sv)
+            {
+                path.push_back(s);
+                s=m[s];
+                
+            }
+            path.push_back(sv); 
+            return;
+
+        }
+
+        for(int i=0 ; i< v ; i++)
+        {
+            if(!visited[i]&& graph[s][i])
+            {
+                m[i]=s,pn.push(i), visited[i]=1;
+            }
+        }
+    }
+
+}
 
 void getPath(int **edges, int n, bool *visited, int v1, int v2)
 {
