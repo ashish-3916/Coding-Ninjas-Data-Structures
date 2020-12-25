@@ -3,6 +3,10 @@ Your task is to tell if there is a path in the given matrix which makes the sent
 There is a path from any cell to all its neighbouring cells. A neighbour may share an edge or a corner.
 
 
+
+// see solution of codezen
+
+
 #include<bits/stdc++.h>
 bool bfs( vector< vector<char> > &board , int n , int m ,int ci , int cj,vector< vector<bool> >&visited,string s)
 {
