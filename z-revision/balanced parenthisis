@@ -1,0 +1,16 @@
+bool isBalanced(string str) 
+{
+    int level = 0;
+ 
+    for (auto &ch : str)
+        if (ch == '(') {
+            level++;
+        } else {
+            level--;
+ 
+            if (level < 0)
+                return false;
+        }
+ 
+    return level == 0;
+}
