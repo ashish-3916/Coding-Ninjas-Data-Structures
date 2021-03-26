@@ -1,4 +1,4 @@
-Given a generic tree, print the input tree in level wise order.
+/*Given a generic tree, print the input tree in level wise order.
 ####For printing a node with data N, you need to follow the exact format -
 N:x1,x2,x3,...,xn
 wherer, N is data of any node present in the binary tree. x1, x2, x3, ...., xn are the children of node N
@@ -18,7 +18,7 @@ Sample Output :
 40:
 40:
 50:
-
+*/
 #include <iostream>
 using namespace std;
 #include <vector>
