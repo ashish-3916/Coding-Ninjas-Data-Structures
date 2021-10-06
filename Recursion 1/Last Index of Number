@@ -1,46 +1,23 @@
-///starting from first
-int lastIndex(int input[], int size, int x) {
- 
-    if(size==0) return -1;
-    
-    int index = lastIndex(input+1, size-1,x);
-    
-    if(index != -1)  return index+1;
-    
-    if(input[0]==x)
-      return 0;
-    
-    return -1;
-
-}
-///starting from last
-
-int lastIndex(int input[], int size, int x) {
-     
-    if(size==0)
+#include<iostream>
+using namespace std;
+int lastIndex(int arr[], int n, int x) {
+    if(n==0) {
         return -1;
-    
-    if(input[size-1]==x)
-        return size-1;
-      
-    return lastIndex(input,size-1,x);
-           
+    }
+    if(arr[n]==x) {
+        return n;
+    }
+    int ans = lastIndex(arr, n-1, x);
+    return ans;
 }
-int main(){
+int main() {
     int n;
     cin >> n;
-  
-    int *input = new int[n];
-    
-    for(int i = 0; i < n; i++) {
-        cin >> input[i];
+    int *arr = new int[n];
+    for(int i=0;i<n;i++) {
+        cin >> arr[i];
     }
-    
     int x;
-    
     cin >> x;
-    
-    cout << lastIndex(input, n, x) << endl;
-
+    cout << lastIndex(arr, n, x) << endl;
 }
-
