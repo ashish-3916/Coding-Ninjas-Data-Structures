@@ -9,7 +9,7 @@ That is, in the given linked list you need to delete N nodes after every M nodes
 node* skipMdeleteN(node  *head, int M, int N) {
     
     if(M==0) return NULL; // edge case  not a base case
-    
+    if(N==0) return head;   // this is another edge case
     //base case
     if(head==NULL ||head->next==NULL) 
     {
