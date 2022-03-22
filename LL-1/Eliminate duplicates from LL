@@ -1,6 +1,16 @@
 node* eliminate_duplicate(node* head)
 {
     //write your code here
+    
+    int size=0;
+    Node *temp =head;
+    while(temp){
+        temp=temp->next;
+        size++;
+    }
+    if(size<1){
+    return head;
+    }else{
     node *p=head->next,*q=head;
     while(p)
     {
@@ -15,6 +25,7 @@ node* eliminate_duplicate(node* head)
         q=q->next;
         p=p->next;
         }
+    }
     }
     return head;
 }
