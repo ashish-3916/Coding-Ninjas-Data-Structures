@@ -21,6 +21,18 @@ node* eliminate_duplicate(node* head)
 ---------------------------------------------------------------------------
 
 // recursively
+node* removeDup(node* head){
+    if(head==nullptr || head->next==nullptr){
+        return head;
+    }
+    node* smallAns = removeDup(head->next);
+    if(smallAns->Data == head->data){
+        delete head;
+        return smallAns;
+    }
+    head->next = smallAns;
+    return head;
+}
 
 SinglyLinkedListNode* removeDuplicates(SinglyLinkedListNode* head) {
  if(head==NULL || head->next == NULL)
