@@ -20,3 +20,23 @@ int main() {
     cin >> n;
     cout << countZeros(n) << endl;
 }
+
+
+//other approach - 
+
+int countZeros(int n) {
+    // Write your code here
+    if(n <=0){
+        return 1;
+     }
+    if(n<10) return 0;
+        //else{
+    //     return 0;
+    // }
+    int smallAns = countZeros(n/10);
+    if(n%10 == 0){
+        smallAns = smallAns+1;
+    }
+    return smallAns;
+        
+}
